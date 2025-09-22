@@ -1,0 +1,161 @@
+# Repositorio: comparativa-sgbd
+
+Este repositorio contiene el trabajo "Comparativa de SGBD Relacionales: SQL Server, MySQL y Oracle Database" 
+
+---
+
+Estructura del repositorio
+
+```
+comparativa-sgbd/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── docs/
+│   ├── Comparativa_SGBD.docx
+│   └── infographic.png
+├── src/
+│   ├── export_pdf.sh
+│   └── generate_readme.py
+└── deliverables/
+    └── Comparativa_SGBD_final.pdf   # (opcional: resultado de la conversión DOCX→PDF)
+```
+
+---
+
+# Contenido de los archivos principales (generados automáticamente)
+
+## README.md
+
+```
+# Comparativa de SGBD Relacionales
+
+Trabajo académico: Comparativa de SGBD Relacionales (SQL Server, MySQL, Oracle)
+
+## Contenido
+
+- `docs/Comparativa_SGBD.docx`: Documento principal con la investigación teórica, la tabla comparativa y el informe de conclusiones listo para imprimir/convertir a PDF.
+- `docs/infographic.png`: Infografía en formato PNG lista para impresión (A4 o carta, 300 dpi recomendado).
+- `src/export_pdf.sh`: Script que usa LibreOffice para convertir el `.docx` a `.pdf` en Linux/macOS (requiere `libreoffice --headless`).
+- `src/generate_readme.py`: Script auxiliar que puede regenerar parte del README o exportar metadatos.
+
+## Cómo usar
+
+1. Clonar el repositorio:
+
+   ```bash
+   git clone <url-del-repo>
+   cd comparativa-sgbd
+   ```
+
+2. Ver los archivos en `docs/`.
+
+3. (Opcional) Convertir `.docx` a `.pdf` con el script (Linux/macOS con LibreOffice instalado):
+
+   ```bash
+   bash src/export_pdf.sh docs/Comparativa_SGBD.docx deliverables/Comparativa_SGBD_final.pdf
+   ```
+
+4. Preparar entrega: incluir `docs/Comparativa_SGBD.docx` y `deliverables/Comparativa_SGBD_final.pdf` y la infografía `docs/infographic.png`.
+
+## Autor
+
+Ruth Pilar Huallpayunca Ayma
+
+```
+
+## LICENSE (MIT)
+
+```
+MIT License
+
+Copyright (c) 2025 Ruth Pilar Huallpayunca Ayma
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## .gitignore
+
+```
+# Sistema operativo
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Documentos de salida
+deliverables/
+```
+
+## src/export_pdf.sh
+
+```
+#!/usr/bin/env bash
+# Convierte DOCX a PDF usando LibreOffice en modo headless
+# Uso: ./export_pdf.sh input.docx output.pdf
+
+set -e
+
+if [ "$#" -ne 2 ]; then
+  echo "Uso: $0 input.docx output.pdf"
+  exit 1
+fi
+
+INPUT="$1"
+OUTPUT="$2"
+
+# Crear carpeta de salida si no existe
+mkdir -p "$(dirname "$OUTPUT")"
+
+# LibreOffice convierte en el mismo directorio de trabajo, con --convert-to pdf
+TMPDIR=$(mktemp -d)
+cp "$INPUT" "$TMPDIR/"
+pushd "$TMPDIR" >/dev/null
+libreoffice --headless --convert-to pdf "$(basename "$INPUT")" >/dev/null 2>&1
+POPDF="$(basename "${INPUT%.*}").pdf"
+if [ ! -f "$POPDF" ]; then
+  echo "Error: la conversión falló"
+  popd >/dev/null
+  rm -rf "$TMPDIR"
+  exit 2
+fi
+mv "$POPDF" "$OUTPUT"
+popd >/dev/null
+rm -rf "$TMPDIR"
+
+echo "PDF generado: $OUTPUT"
+```
+
+## src/generate_readme.py
+
+```
+#!/usr/bin/env python3
+# Script auxiliar que imprime un resumen del repositorio
+import os
+
+if __name__ == '__main__':
+    base = os.path.dirname(os.path.dirname(__file__))
+    docs = os.path.join(base, 'docs')
+    print('Archivos en docs:')
+    if os.path.isdir(docs):
+        for f in os.listdir(docs):
+            print(' -', f)
+    else:
+        print(' Carpeta docs/ no encontrada')
