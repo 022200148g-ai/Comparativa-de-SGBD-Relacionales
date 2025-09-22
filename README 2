@@ -1,0 +1,59 @@
+# 📊 Comparativa de SGBD Relacionales
+
+Este repositorio contiene una investigación comparativa de tres Sistemas de Gestión de Bases de Datos Relacionales (SGBD): **SQL Server**, **MySQL** y **Oracle Database**.  
+
+Incluye documentación teórica, una tabla comparativa, conclusiones y una infografía lista para imprimir.
+
+---
+
+## 📂 Contenido del Repositorio
+
+- `docs/Comparativa_SGBD.docx` → Documento con toda la investigación.
+- `docs/infographic.png` → Infografía comparativa en formato visual.
+- `src/` → Scripts auxiliares:
+  - `export_pdf.sh` → Convierte el DOCX a PDF (requiere LibreOffice).
+  - `generate_readme.py` → Script de ejemplo para generar README.
+- `deliverables/` → Carpeta para productos finales (ej. PDF exportado).
+- `README.md` → Este archivo con explicación y guía de uso.
+- `LICENSE` → Licencia MIT.
+- `.gitignore` → Ignorar archivos temporales.
+
+---
+
+## 🖼️ Infografía
+
+![Infografía Comparativa](docs/infographic.png)
+
+---
+
+## 🔎 Comparativa Resumida
+
+| Aspecto                | SQL Server | MySQL | Oracle Database |
+|-------------------------|------------|-------|-----------------|
+| **Rendimiento**         | Muy bueno en OLTP/DW | Ideal en web apps | Excelente con RAC |
+| **Seguridad**           | TDE, Always Encrypted | Buena (mejor en Enterprise) | Avanzada: Vault, Label Security |
+| **Costo**               | Medio/Alto | Gratis (Community) | Alto |
+| **Facilidad de uso**    | SSMS, curva moderada | Sencillo, curva baja | Complejo, requiere DBA |
+| **Comunidad/Soporte**   | Amplia + Microsoft | Enorme open source | Corporativo, profesional |
+| **Casos de uso típicos**| ERP, BI, Azure apps | E-commerce, LAMP | Bancos, telecom |
+
+---
+
+## 🚀 Recomendación del Proyecto
+
+Para un **sitio de e-commerce de una startup**, se recomienda **MySQL (InnoDB)**:  
+- ✅ Bajo costo inicial (Community Edition).  
+- ✅ Rendimiento y soporte ACID.  
+- ✅ Facilidad de despliegue en la nube.  
+
+---
+
+## 👩‍🎓 Autor
+
+- **Ruth Pilar Huallpayunca Ayma**
+
+---
+
+## 📜 Licencia
+
+Este proyecto está bajo la licencia [MIT](LICENSE).
